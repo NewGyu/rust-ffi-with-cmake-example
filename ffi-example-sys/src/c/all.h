@@ -1,2 +1,2 @@
-#include "array.h"
-#include "string.h"
+#include "array/array.h"
+#include "string/string.h"

@@ -6,8 +6,8 @@ fn main() {
         .warnings(true)
         .flag("-Wall")
         .flag("-Wextra")
-        .file("src/c/array.c")
-        .file("src/c/string.c")
+        .file("src/c/array/array.c")
+        .file("src/c/string/string.c")
         .include("src/c")
         .compile("libffi_tips.a");
 
