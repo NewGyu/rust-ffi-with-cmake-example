@@ -3,7 +3,11 @@ use std::path::PathBuf;
 use cmake::Config;
 
 fn main() {
-    let dst = Config::new("src/c").build();
+    let em_cmake = PathBuf::from(env::var("EMSDK").unwrap()).join("upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake");
+    let dst = Config::new("src/c")
+        .define("CMAKE_BUILD_TYPE", "MinSizeRel")
+        .define("CMAKE_TOOLCHAIN_FILE", em_cmake)
+        .build();
     println!("cargo:rustc-link-search=native={}", dst.display());
     println!("cargo:rustc-link-lib=static=string");
     println!("cargo:rustc-link-lib=static=array");
