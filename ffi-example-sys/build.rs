@@ -1,15 +1,12 @@
 use std::env;
 use std::path::PathBuf;
+use cmake::Config;
 
 fn main() {
-    cc::Build::new()
-        .warnings(true)
-        .flag("-Wall")
-        .flag("-Wextra")
-        .file("src/c/array/array.c")
-        .file("src/c/string/string.c")
-        .include("src/c")
-        .compile("libffi_tips.a");
+    let dst = Config::new("src/c").build();
+    println!("cargo:rustc-link-search=native={}", dst.display());
+    println!("cargo:rustc-link-lib=static=string");
+    println!("cargo:rustc-link-lib=static=array");
 
     let bindings = bindgen::Builder::default()
         .header("src/c/all.h")
