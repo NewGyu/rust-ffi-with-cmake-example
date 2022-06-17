@@ -1,13 +1,17 @@
+use cmake::Config;
 use std::env;
 use std::path::PathBuf;
-use cmake::Config;
 
 fn main() {
-    let em_cmake = PathBuf::from(env::var("EMSDK").unwrap()).join("upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake");
-    let dst = Config::new("src/c")
-        .define("CMAKE_BUILD_TYPE", "MinSizeRel")
-        .define("CMAKE_TOOLCHAIN_FILE", em_cmake)
-        .build();
+    let mut cm = Config::new("src/c");
+    cm.define("CMAKE_BUILD_TYPE", "MinSizeRel");
+    if cfg!(target_arch = "wawm32") {
+        let em_cmake = PathBuf::from(env!("EMSDK"))
+            .join("upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake");
+        cm.define("CMAKE_TOOLCHAIN_FILE", em_cmake);
+    }
+    let dst = &cm.build();
+
     println!("cargo:rustc-link-search=native={}", dst.display());
     println!("cargo:rustc-link-lib=static=string");
     println!("cargo:rustc-link-lib=static=array");
