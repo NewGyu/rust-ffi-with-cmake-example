@@ -33,7 +33,8 @@
 				"rust-lang.rust-analyzer",
 				"tamasfe.even-better-toml",
 				"serayuzgur.crates",
-				"EditorConfig.EditorConfig"
+				"EditorConfig.EditorConfig",
+				"dtsvet.vscode-wasm"
 			]
 		}
 	},
