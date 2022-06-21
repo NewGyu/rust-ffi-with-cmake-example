@@ -1,10 +1,10 @@
-mod lib;
+use mylib::{hello, print_str};
 //mod sequence;
 //use sequence::Sequence;
 
 fn main() {
-    lib::print_str("Hello FFI!!");
-    println!("Hi, {}", lib::hello());
+    print_str("Hello FFI!!");
+    println!("Hi, {}", hello());
     /*
         let slice = &[1, 13, 5];
         assert_eq!(
