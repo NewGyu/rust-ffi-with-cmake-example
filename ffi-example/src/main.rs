@@ -3,8 +3,8 @@ mod lib;
 //use sequence::Sequence;
 
 fn main() {
-    lib::print_str("Hello FFI!!");
-    println!("Hi, {}", lib::hello());
+    lib::print_by_c("Hello FFI!!");
+    println!("Hi, {}", lib::hello_by_c());
     /*
         let slice = &[1, 13, 5];
         assert_eq!(
